@@ -14,6 +14,10 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
     @IBAction func addItem(sender: AnyObject) {
         todoItems.append(todoText.text)
         todoText.resignFirstResponder()
+        
+        let fixedTodo = todoItems
+        NSUserDefaults.standardUserDefaults().setObject(fixedTodo, forKey: "todolist")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -30,6 +30,17 @@ class FirstViewController: UIViewController, UITableViewDelegate {
         cell.textLabel!.text = todoItems[indexPath.row]
         return cell
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        todoItems = []
+        
+        if var storedTodoItems: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("todolist") {
+            for var i=0; i < storedTodoItems.count ; i++ {
+                todoItems.append(storedTodoItems[i] as NSString)
+            }
+        }
+        
+    }
 
 }
 
