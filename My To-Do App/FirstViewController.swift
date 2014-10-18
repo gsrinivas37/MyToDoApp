@@ -16,6 +16,8 @@ class FirstViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
     }
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,8 +41,20 @@ class FirstViewController: UIViewController, UITableViewDelegate {
                 todoItems.append(storedTodoItems[i] as NSString)
             }
         }
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+     
+        if(editingStyle == UITableViewCellEditingStyle.Delete) {
+            todoItems.removeAtIndex(indexPath.row)
+            
+            let fixedTodo = todoItems
+            NSUserDefaults.standardUserDefaults().setObject(fixedTodo, forKey: "todolist")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            tableView.reloadData()
+        }
         
     }
-
 }
 
